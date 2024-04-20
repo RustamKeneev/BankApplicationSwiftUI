@@ -13,6 +13,8 @@
 		FFC5A4092BD2FC9B00948E51 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FFC5A4082BD2FC9B00948E51 /* Preview Assets.xcassets */; };
 		FFC5A40B2BD2FC9B00948E51 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC5A40A2BD2FC9B00948E51 /* Persistence.swift */; };
 		FFC5A40E2BD2FC9B00948E51 /* BankApplicationSwiftUI.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FFC5A40C2BD2FC9B00948E51 /* BankApplicationSwiftUI.xcdatamodeld */; };
+		FFC5A4162BD3775D00948E51 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC5A4152BD3775D00948E51 /* MainView.swift */; };
+		FFC5A4182BD3E33A00948E51 /* CreditCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC5A4172BD3E33A00948E51 /* CreditCardView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +25,8 @@
 		FFC5A4082BD2FC9B00948E51 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		FFC5A40A2BD2FC9B00948E51 /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		FFC5A40D2BD2FC9B00948E51 /* BankApplicationSwiftUI.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BankApplicationSwiftUI.xcdatamodel; sourceTree = "<group>"; };
+		FFC5A4152BD3775D00948E51 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
+		FFC5A4172BD3E33A00948E51 /* CreditCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +59,7 @@
 		FFC5A4002BD2FC9900948E51 /* BankApplicationSwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				FFC5A4142BD3773600948E51 /* Main */,
 				FFC5A4012BD2FC9900948E51 /* BankApplicationSwiftUIApp.swift */,
 				FFC5A4032BD2FC9900948E51 /* ContentView.swift */,
 				FFC5A4052BD2FC9B00948E51 /* Assets.xcassets */,
@@ -71,6 +76,15 @@
 				FFC5A4082BD2FC9B00948E51 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		FFC5A4142BD3773600948E51 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				FFC5A4152BD3775D00948E51 /* MainView.swift */,
+				FFC5A4172BD3E33A00948E51 /* CreditCardView.swift */,
+			);
+			path = Main;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -146,7 +160,9 @@
 				FFC5A40B2BD2FC9B00948E51 /* Persistence.swift in Sources */,
 				FFC5A4042BD2FC9900948E51 /* ContentView.swift in Sources */,
 				FFC5A40E2BD2FC9B00948E51 /* BankApplicationSwiftUI.xcdatamodeld in Sources */,
+				FFC5A4162BD3775D00948E51 /* MainView.swift in Sources */,
 				FFC5A4022BD2FC9900948E51 /* BankApplicationSwiftUIApp.swift in Sources */,
+				FFC5A4182BD3E33A00948E51 /* CreditCardView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
