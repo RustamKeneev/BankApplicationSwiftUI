@@ -15,6 +15,7 @@
 		FFC5A40E2BD2FC9B00948E51 /* BankApplicationSwiftUI.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = FFC5A40C2BD2FC9B00948E51 /* BankApplicationSwiftUI.xcdatamodeld */; };
 		FFC5A4162BD3775D00948E51 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC5A4152BD3775D00948E51 /* MainView.swift */; };
 		FFC5A4182BD3E33A00948E51 /* CreditCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC5A4172BD3E33A00948E51 /* CreditCardView.swift */; };
+		FFC5A41A2BD43D7500948E51 /* AddCardForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC5A4192BD43D7500948E51 /* AddCardForm.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		FFC5A40D2BD2FC9B00948E51 /* BankApplicationSwiftUI.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BankApplicationSwiftUI.xcdatamodel; sourceTree = "<group>"; };
 		FFC5A4152BD3775D00948E51 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		FFC5A4172BD3E33A00948E51 /* CreditCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardView.swift; sourceTree = "<group>"; };
+		FFC5A4192BD43D7500948E51 /* AddCardForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCardForm.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,10 +83,19 @@
 		FFC5A4142BD3773600948E51 /* Main */ = {
 			isa = PBXGroup;
 			children = (
+				FFC5A41B2BD5235800948E51 /* AddCard */,
 				FFC5A4152BD3775D00948E51 /* MainView.swift */,
 				FFC5A4172BD3E33A00948E51 /* CreditCardView.swift */,
 			);
 			path = Main;
+			sourceTree = "<group>";
+		};
+		FFC5A41B2BD5235800948E51 /* AddCard */ = {
+			isa = PBXGroup;
+			children = (
+				FFC5A4192BD43D7500948E51 /* AddCardForm.swift */,
+			);
+			path = AddCard;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -161,6 +172,7 @@
 				FFC5A4042BD2FC9900948E51 /* ContentView.swift in Sources */,
 				FFC5A40E2BD2FC9B00948E51 /* BankApplicationSwiftUI.xcdatamodeld in Sources */,
 				FFC5A4162BD3775D00948E51 /* MainView.swift in Sources */,
+				FFC5A41A2BD43D7500948E51 /* AddCardForm.swift in Sources */,
 				FFC5A4022BD2FC9900948E51 /* BankApplicationSwiftUIApp.swift in Sources */,
 				FFC5A4182BD3E33A00948E51 /* CreditCardView.swift in Sources */,
 			);
