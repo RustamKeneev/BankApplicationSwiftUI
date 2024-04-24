@@ -10,11 +10,26 @@ import CoreData
 
 struct CreditCardView: View {
     let card: Card
-
+    @State private var shouldActionSheet = false
     var body: some View {
         VStack(alignment: .leading, spacing: 16){
-            Text(card.name ?? "")
-                .font(.system(size: 24, weight: .semibold))
+            HStack{
+                Text(card.name ?? "")
+                    .font(.system(size: 24, weight: .semibold))
+                Spacer()
+                Button(action: {
+                    shouldActionSheet.toggle()
+                }, label: {
+                    Image(systemName: "ellipsis")
+                        .font(.system(size: 24, weight: .bold))
+                })
+                .actionSheet(isPresented: $shouldActionSheet, content: {
+                    .init(title: Text(self.card.name ?? ""), message: Text("Options"), buttons: [
+                        .destructive(Text("Delete Card"), action: handleDelete),
+                        .cancel()
+                    ])
+                })
+            }
             HStack {
                 Image("visa")
                     .resizable()
@@ -56,6 +71,16 @@ struct CreditCardView: View {
         .shadow(radius: 8)
         .padding(.horizontal)
         .padding(.top, 8)
+    }
+    
+    private func handleDelete(){
+        let viewContext = PersistenceController.shared.container.viewContext
+        viewContext.delete(card)
+        do {
+            try viewContext.save()
+        }catch{
+            print("Error -> \(error)")
+        }
     }
 }
 

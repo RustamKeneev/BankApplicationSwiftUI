@@ -32,6 +32,8 @@ struct MainView: View {
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
                 .frame(height: 280)
                 .indexViewStyle(.page(backgroundDisplayMode: .always))
+                }else{
+                    emptyPromptMessage
                 }
                 Spacer()
                     .fullScreenCover(isPresented: $shouldPresentAddCardForm, onDismiss: nil){
@@ -46,6 +48,26 @@ struct MainView: View {
             },
                 trailing: addCardButton)
         }//: NAVIGATION VIEW
+    }
+    
+    private var emptyPromptMessage: some View {
+        VStack{
+            Text("You currently have no cards in the system")
+                .padding(.horizontal, 48)
+                .padding(.vertical)
+                .multilineTextAlignment(.center)
+            Button(action: {
+                shouldPresentAddCardForm.toggle()
+            }, label: {
+                Text("+ Add Your First Card")
+                    .foregroundColor(Color(.systemBackground))
+                    .padding(EdgeInsets(top: 10, leading: 14, bottom: 10, trailing: 14))
+                    .background(Color(.label))
+                    .cornerRadius(6)
+            })//: BUTTON
+            
+        }//: VSTACK
+        .font(.system(size: 22, weight: .bold))
     }
     
     private var deleteAllButton: some View {
