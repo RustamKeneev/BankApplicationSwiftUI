@@ -16,6 +16,7 @@
 		FFC5A4162BD3775D00948E51 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC5A4152BD3775D00948E51 /* MainView.swift */; };
 		FFC5A4182BD3E33A00948E51 /* CreditCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC5A4172BD3E33A00948E51 /* CreditCardView.swift */; };
 		FFC5A41A2BD43D7500948E51 /* AddCardForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC5A4192BD43D7500948E51 /* AddCardForm.swift */; };
+		FFC5A41E2BD8E49B00948E51 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC5A41D2BD8E49B00948E51 /* Card.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,6 +30,7 @@
 		FFC5A4152BD3775D00948E51 /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		FFC5A4172BD3E33A00948E51 /* CreditCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreditCardView.swift; sourceTree = "<group>"; };
 		FFC5A4192BD43D7500948E51 /* AddCardForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCardForm.swift; sourceTree = "<group>"; };
+		FFC5A41D2BD8E49B00948E51 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +63,7 @@
 		FFC5A4002BD2FC9900948E51 /* BankApplicationSwiftUI */ = {
 			isa = PBXGroup;
 			children = (
+				FFC5A41C2BD8E47D00948E51 /* Extension */,
 				FFC5A4142BD3773600948E51 /* Main */,
 				FFC5A4012BD2FC9900948E51 /* BankApplicationSwiftUIApp.swift */,
 				FFC5A4032BD2FC9900948E51 /* ContentView.swift */,
@@ -96,6 +99,14 @@
 				FFC5A4192BD43D7500948E51 /* AddCardForm.swift */,
 			);
 			path = AddCard;
+			sourceTree = "<group>";
+		};
+		FFC5A41C2BD8E47D00948E51 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				FFC5A41D2BD8E49B00948E51 /* Card.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -175,6 +186,7 @@
 				FFC5A41A2BD43D7500948E51 /* AddCardForm.swift in Sources */,
 				FFC5A4022BD2FC9900948E51 /* BankApplicationSwiftUIApp.swift in Sources */,
 				FFC5A4182BD3E33A00948E51 /* CreditCardView.swift in Sources */,
+				FFC5A41E2BD8E49B00948E51 /* Card.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

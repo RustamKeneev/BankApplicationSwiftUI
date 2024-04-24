@@ -6,11 +6,14 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct CreditCardView: View {
+    let card: Card
+
     var body: some View {
         VStack(alignment: .leading, spacing: 16){
-            Text("Apple Blue Visa Card")
+            Text(card.name ?? "")
                 .font(.system(size: 24, weight: .semibold))
             HStack {
                 Image("visa")
@@ -21,18 +24,30 @@ struct CreditCardView: View {
                 Spacer()
                 Text("Balance 5,000$")
                     .font(.system(size: 18, weight: .semibold))
-
+                
             }//: HSTACK
-            Text("1234 1234 1234 1234")
-            Text("Credit Limit: 50,000$")
+            Text(card.number ?? "")
+            Text("Credit Limit: \(card.limit) $")
             HStack{
                 Spacer()
             }//: HSTACK
         }//: VSTACK
         .padding()
         .background(
-            LinearGradient(colors: [Color.blue.opacity(0.6), Color.blue], startPoint: .top, endPoint: .bottom
-        ))
+            VStack {
+                if let colorData = card.color,
+                   let uiColor = UIColor.color(data: colorData) {
+                    let actualColor = Color(uiColor)
+                    LinearGradient(
+                        gradient: Gradient(colors: [actualColor.opacity(0.6), actualColor]),
+                        startPoint: .top,
+                        endPoint: .bottom
+                    )
+                } else {
+                    Color.purple
+                }
+            }//: VStack            
+        )
         .overlay(RoundedRectangle(cornerRadius: 8)
             .stroke(Color.black.opacity(0.5), lineWidth: 1)
         )
@@ -40,9 +55,15 @@ struct CreditCardView: View {
         .cornerRadius(8)
         .shadow(radius: 8)
         .padding(.horizontal)
-        .padding(.top, 8)    }
+        .padding(.top, 8)
+    }
 }
 
+
 #Preview {
-    CreditCardView()
+    if let sampleCard = Card.fetchSampleCard() {
+        CreditCardView(card: sampleCard)
+    } else {
+        Text("No card available for preview")
+    }
 }

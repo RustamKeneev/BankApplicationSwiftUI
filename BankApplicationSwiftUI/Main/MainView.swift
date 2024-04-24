@@ -25,7 +25,7 @@ struct MainView: View {
                 if !cards.isEmpty{
                 TabView{
                     ForEach(cards){ card in
-                        CreditCardView()
+                        CreditCardView(card: card)
                             .padding(.bottom, 50)
                     }//: LOOP
                 }//: TABVIEW
