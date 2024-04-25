@@ -9,8 +9,9 @@ import SwiftUI
 import CoreData
 
 struct AddCardForm: View {
-    @Binding var shouldPresentAddCardForm: Bool
-    
+        
+    @Environment(\.presentationMode) var presentationMode
+
     @State private var name = ""
     @State private var cardNumber = ""
     @State private var limit = ""
@@ -20,6 +21,23 @@ struct AddCardForm: View {
     @State private var color = Color.blue
     
     let currentYear = Calendar.current.component(.year, from: Date())
+    
+    let card: Card?
+    init(card: Card? = nil){
+        self.card = card
+        _name = State(initialValue: self.card?.name ?? "")
+        _cardNumber = State(initialValue: self.card?.number ?? "")
+        if let limit = card?.limit {
+            _limit = State(initialValue: String(limit))
+        }
+        _cardType = State(initialValue: self.card?.type ?? "")
+        _month = State(initialValue: Int(self.card?.expMonth ?? 1))
+        _year = State(initialValue: Int(self.card?.expYear ?? Int16(currentYear)))
+        if let data = self.card?.color, let uiColor = UIColor.color(data: data){
+            let changeColor = Color(uiColor)
+            _color = State(initialValue: changeColor)
+        }
+    }
     
     var body: some View {
         NavigationView{
@@ -56,7 +74,7 @@ struct AddCardForm: View {
                 }//: SECTION COLOR
                 
             }//: FORM
-            .navigationTitle("Add credit card")
+            .navigationTitle(self.card != nil ? self.card?.name ?? "" : "Add credit card")
             .navigationBarItems(leading: cancelButton, trailing: saveButton)
         }//: NAVIGATION
     }
@@ -64,7 +82,7 @@ struct AddCardForm: View {
     private var saveButton: some View {
         Button(action: {
             let viewContext = PersistenceController.shared.container.viewContext
-            let card = Card(context: viewContext)
+            let card = self.card != nil ? self.card! : Card(context: viewContext)
             card.name = self.name
             card.number = self.cardNumber
             card.limit = Int32(self.limit) ?? 0
@@ -74,7 +92,7 @@ struct AddCardForm: View {
             card.color = UIColor(self.color).encode()
             do {
                 try viewContext.save()
-                shouldPresentAddCardForm.toggle() 
+                presentationMode.wrappedValue.dismiss()
             }catch{
                 print("error saved: \(error)")
             }
@@ -85,7 +103,8 @@ struct AddCardForm: View {
     
     private var cancelButton: some View {
         Button(action: {
-            shouldPresentAddCardForm.toggle()
+            presentationMode.wrappedValue.dismiss()
+
         }, label: {
             Text("Cancel")
         })
@@ -93,5 +112,5 @@ struct AddCardForm: View {
 }
 
 #Preview {
-    AddCardForm(shouldPresentAddCardForm: .constant(false))
+    AddCardForm()
 }

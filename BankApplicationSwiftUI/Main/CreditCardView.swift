@@ -11,6 +11,8 @@ import CoreData
 struct CreditCardView: View {
     let card: Card
     @State private var shouldActionSheet = false
+    @State private var shouldShowEditForm = false
+    @State var refreshId = UUID()
     var body: some View {
         VStack(alignment: .leading, spacing: 16){
             HStack{
@@ -25,6 +27,9 @@ struct CreditCardView: View {
                 })
                 .actionSheet(isPresented: $shouldActionSheet, content: {
                     .init(title: Text(self.card.name ?? ""), message: Text("Options"), buttons: [
+                        .default(Text("Edit"), action: {
+                            shouldShowEditForm.toggle()
+                        }),
                         .destructive(Text("Delete Card"), action: handleDelete),
                         .cancel()
                     ])
@@ -42,9 +47,13 @@ struct CreditCardView: View {
                 
             }//: HSTACK
             Text(card.number ?? "")
-            Text("Credit Limit: \(card.limit) $")
             HStack{
+                Text("Credit Limit: \(card.limit) $")
                 Spacer()
+                VStack(alignment: .trailing){
+                    Text("Valid Thru")
+                    Text("\(String(format: "%02d", card.expMonth + 1))/\(String(card.expYear % 2000))")
+                }
             }//: HSTACK
         }//: VSTACK
         .padding()
@@ -71,6 +80,9 @@ struct CreditCardView: View {
         .shadow(radius: 8)
         .padding(.horizontal)
         .padding(.top, 8)
+        .fullScreenCover(isPresented: $shouldShowEditForm) {
+            AddCardForm(card: self.card)
+        }
     }
     
     private func handleDelete(){
