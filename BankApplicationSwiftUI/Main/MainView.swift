@@ -15,10 +15,17 @@ struct MainView: View {
     
     @Environment(\.managedObjectContext) private var viewContext
 
+    //MARK: - CARD FETCH
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Card.timestamp, ascending: false)],
         animation: .default)
     private var cards: FetchedResults<Card>
+    
+    //MARK: - CARD TRANSACTION
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \CardTransaction.timestamp, ascending: false)],
+        animation: .default)
+    private var transactions: FetchedResults<CardTransaction>
     
     var body: some View {
         NavigationView{
@@ -47,6 +54,42 @@ struct MainView: View {
                     .fullScreenCover(isPresented: $shouldShowAddTransactionForm){
                         AddTransactionForm()
                     }
+                    ForEach(transactions){ transaction in
+                        VStack {
+                            HStack {
+                                VStack(alignment: .leading) {
+                                    Text(transaction.name ?? "")
+                                        .font(.headline)
+                                    if let date = transaction.timestamp{
+                                        Text(dateFormatter.string(from: date))
+                                    }
+                                }//: VSTACK
+                                Spacer()
+                                VStack(alignment: .trailing){
+                                    Button(action: {
+                                        
+                                    }, label: {
+                                        Image(systemName: "ellipsis")
+                                            .font(.system(size: 24))
+                                    })//: BUTTON
+                                    .padding(EdgeInsets(top: 6, leading: 8, bottom: 4, trailing: 0))
+                                    Text(String(format:"$%.2f", transaction.ammount ))
+                                }//: VSTACK
+                            }//: HSTACK
+                            if let photoData = transaction.photoData,
+                               let uiImage = UIImage(data: photoData){
+                                Image(uiImage: uiImage)
+                                    .resizable()
+                                    .scaledToFill()
+                            }
+                        }//:VSTACK
+                        .foregroundColor(Color(.label))
+                        .padding()
+                        .background(Color.white)
+                        .cornerRadius(6)
+                        .shadow(radius: 6)
+                        .padding()
+                    }//: LOOP TRANSACTION
                 }else{
                     emptyPromptMessage
                 }
@@ -64,6 +107,13 @@ struct MainView: View {
                 trailing: addCardButton)
         }//: NAVIGATION VIEW
     }
+    
+    private let dateFormatter: DateFormatter = {
+        let formater = DateFormatter()
+        formater.dateStyle = .short
+        formater.timeStyle = .none
+        return formater
+    }()
     
     private var emptyPromptMessage: some View {
         VStack{

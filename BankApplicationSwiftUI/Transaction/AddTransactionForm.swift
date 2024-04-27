@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct AddTransactionForm: View {
     
@@ -13,6 +14,7 @@ struct AddTransactionForm: View {
     @State private var name = ""
     @State private var ammount = ""
     @State private var date = Date()
+    @State private var photoData: Data?
     @State private var shouldPresentPhotoPicker = false
     
     
@@ -51,9 +53,7 @@ struct AddTransactionForm: View {
             .navigationBarItems(leading: cancelButton, trailing: saveButton)
         }//: NAVIGATIONVIEW
     }
-    
-    @State private var photoData: Data?
-    
+        
     struct PhotoPickerView: UIViewControllerRepresentable{
         
         @Binding var photoData: Data?
@@ -93,7 +93,19 @@ struct AddTransactionForm: View {
     
     private var saveButton: some View{
         Button(action: {
+            let context = PersistenceController.shared.container.viewContext
+            let transaction = CardTransaction(context: context)
+            transaction.name = self.name
+            transaction.timestamp = self.date
+            transaction.ammount = Float(self.ammount) ?? 0
+            transaction.photoData = self.photoData
             
+            do {
+                try context.save()
+                presentationMode.wrappedValue.dismiss()
+            }catch{
+                print("Error transaction save \(error)")
+            }
         }, label: {
             Text("Save")
         })
