@@ -18,6 +18,8 @@
 		FFC5A41A2BD43D7500948E51 /* AddCardForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC5A4192BD43D7500948E51 /* AddCardForm.swift */; };
 		FFC5A41E2BD8E49B00948E51 /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC5A41D2BD8E49B00948E51 /* Card.swift */; };
 		FFC5A4232BDB8E3900948E51 /* AddTransactionForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC5A4222BDB8E3900948E51 /* AddTransactionForm.swift */; };
+		FFC5A4252BDE97A100948E51 /* TransactionsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC5A4242BDE97A100948E51 /* TransactionsListView.swift */; };
+		FFC5A4272BDE9AE300948E51 /* CardTransactionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC5A4262BDE9AE300948E51 /* CardTransactionView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +35,8 @@
 		FFC5A4192BD43D7500948E51 /* AddCardForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddCardForm.swift; sourceTree = "<group>"; };
 		FFC5A41D2BD8E49B00948E51 /* Card.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		FFC5A4222BDB8E3900948E51 /* AddTransactionForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransactionForm.swift; sourceTree = "<group>"; };
+		FFC5A4242BDE97A100948E51 /* TransactionsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsListView.swift; sourceTree = "<group>"; };
+		FFC5A4262BDE9AE300948E51 /* CardTransactionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTransactionView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +120,8 @@
 			isa = PBXGroup;
 			children = (
 				FFC5A4222BDB8E3900948E51 /* AddTransactionForm.swift */,
+				FFC5A4242BDE97A100948E51 /* TransactionsListView.swift */,
+				FFC5A4262BDE9AE300948E51 /* CardTransactionView.swift */,
 			);
 			path = Transaction;
 			sourceTree = "<group>";
@@ -190,11 +196,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FFC5A4272BDE9AE300948E51 /* CardTransactionView.swift in Sources */,
 				FFC5A40B2BD2FC9B00948E51 /* Persistence.swift in Sources */,
 				FFC5A4042BD2FC9900948E51 /* ContentView.swift in Sources */,
 				FFC5A40E2BD2FC9B00948E51 /* BankApplicationSwiftUI.xcdatamodeld in Sources */,
 				FFC5A4162BD3775D00948E51 /* MainView.swift in Sources */,
 				FFC5A4232BDB8E3900948E51 /* AddTransactionForm.swift in Sources */,
+				FFC5A4252BDE97A100948E51 /* TransactionsListView.swift in Sources */,
 				FFC5A41A2BD43D7500948E51 /* AddCardForm.swift in Sources */,
 				FFC5A4022BD2FC9900948E51 /* BankApplicationSwiftUIApp.swift in Sources */,
 				FFC5A4182BD3E33A00948E51 /* CreditCardView.swift in Sources */,
