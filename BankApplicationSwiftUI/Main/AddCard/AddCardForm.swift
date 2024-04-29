@@ -23,8 +23,11 @@ struct AddCardForm: View {
     let currentYear = Calendar.current.component(.year, from: Date())
     
     let card: Card?
-    init(card: Card? = nil){
+    var didAddCard: ((Card) -> ())? = nil
+    
+    init(card: Card? = nil, didAddCard: ((Card) -> ())? = nil){
         self.card = card
+        self.didAddCard = didAddCard
         _name = State(initialValue: self.card?.name ?? "")
         _cardNumber = State(initialValue: self.card?.number ?? "")
         if let limit = card?.limit {
@@ -95,6 +98,7 @@ struct AddCardForm: View {
             do {
                 try viewContext.save()
                 presentationMode.wrappedValue.dismiss()
+                didAddCard?(card)
             }catch{
                 print("error saved: \(error)")
             }

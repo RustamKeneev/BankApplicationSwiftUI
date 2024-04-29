@@ -72,7 +72,8 @@ struct AddTransactionForm: View {
             }
             func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
                 let image = info[.originalImage] as? UIImage
-                let imageData = image?.jpegData(compressionQuality: 1)
+                let resizeImage = image?.resized(to: .init(width: 500, height: 500))
+                let imageData = resizeImage?.jpegData(compressionQuality: 0.5)
                 self.parent.photoData = imageData
                 picker.dismiss(animated: true)
             }
