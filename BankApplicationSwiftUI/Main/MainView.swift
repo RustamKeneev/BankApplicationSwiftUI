@@ -11,9 +11,9 @@ import CoreData
 struct MainView: View {
     
     @State var shouldPresentAddCardForm = false
-    
+    @State private var cardSelectionIndex = 0
     @Environment(\.managedObjectContext) private var viewContext
-
+    
     //MARK: - CARD FETCH
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \Card.timestamp, ascending: false)],
@@ -24,16 +24,22 @@ struct MainView: View {
         NavigationView{
             ScrollView{
                 if !cards.isEmpty{
-                TabView{
-                    ForEach(cards){ card in
-                        CreditCardView(card: card)
-                            .padding(.bottom, 50)
-                    }//: LOOP
-                }//: TABVIEW
+                    TabView(selection: $cardSelectionIndex){
+                        ForEach(cards.indices, id: \.self) { index in
+                            let card = cards[index]
+                            CreditCardView(card: card)
+                                .padding(.bottom, 50)
+                                .tag(index)
+                        }//: LOOP
+                    }//: TABVIEW
                 .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
                 .frame(height: 280)
                 .indexViewStyle(.page(backgroundDisplayMode: .always))
-                    TransactionsListView()
+                    if cardSelectionIndex < cards.count {
+                        let selectedCard = cards[cardSelectionIndex]
+                        Text(selectedCard.name ?? "")
+                        TransactionsListView(card: selectedCard)
+                    }
                 }else{
                     emptyPromptMessage
                 }

@@ -9,14 +9,21 @@ import SwiftUI
 import CoreData
 
 struct TransactionsListView: View {
+    
+    let card: Card
+    
+    init(card: Card){
+        self.card = card
+        fetchRequest = FetchRequest<CardTransaction>(entity: CardTransaction.entity(), sortDescriptors: [
+            .init(key: "timestamp", ascending: false)
+        ], predicate: .init(format: "card == %@", self.card))
+    }
+    
     @State var shouldShowAddTransactionForm = false
     @Environment(\.managedObjectContext) private var viewContext
     
     //MARK: - CARD TRANSACTION
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \CardTransaction.timestamp, ascending: false)],
-        animation: .default)
-    private var transactions: FetchedResults<CardTransaction>
+    var fetchRequest: FetchRequest<CardTransaction>
 
     var body: some View {
         VStack{
@@ -32,9 +39,9 @@ struct TransactionsListView: View {
                     .cornerRadius(6)
             })
             .fullScreenCover(isPresented: $shouldShowAddTransactionForm){
-                AddTransactionForm()
+                AddTransactionForm(card: self.card)
             }
-            ForEach(transactions){ transaction in
+            ForEach(fetchRequest.wrappedValue){ transaction in
                 CardTransactionView(transaction: transaction)
             }//: LOOP TRANSACTION
         }//: VSTACK
@@ -42,5 +49,11 @@ struct TransactionsListView: View {
 }
 
 #Preview {
-    TransactionsListView()
+    if let sampleCard = Card.fetchSampleCard() {
+        TransactionsListView(card: sampleCard)
+    } else {
+        Text("No card available for preview")
+    }
 }
+
+

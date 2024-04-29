@@ -36,11 +36,12 @@ struct CreditCardView: View {
                 })
             }
             HStack {
-                Image("visa")
+                let imageName = card.type?.lowercased() ?? ""
+                Image(imageName)
                     .resizable()
                     .scaledToFit()
                     .frame(height: 44)
-                
+                    .clipped()
                 Spacer()
                 Text("Balance 5,000$")
                     .font(.system(size: 18, weight: .semibold))

@@ -10,6 +10,8 @@ import CoreData
 
 struct AddTransactionForm: View {
     
+    let card: Card
+    
     @Environment(\.presentationMode) var presentationMode
     @State private var name = ""
     @State private var ammount = ""
@@ -99,7 +101,7 @@ struct AddTransactionForm: View {
             transaction.timestamp = self.date
             transaction.ammount = Float(self.ammount) ?? 0
             transaction.photoData = self.photoData
-            
+            transaction.card = self.card
             do {
                 try context.save()
                 presentationMode.wrappedValue.dismiss()
@@ -121,5 +123,9 @@ struct AddTransactionForm: View {
 }
 
 #Preview {
-    AddTransactionForm()
+    if let sampleCard = Card.fetchSampleCard() {
+        AddTransactionForm(card: sampleCard)
+    } else {
+        Text("No card available for preview")
+    }
 }
