@@ -13,6 +13,8 @@ struct CategoriesListView: View {
     @State private var name = ""
     @State private var color = Color.red
     
+    @Environment(\.managedObjectContext) private var viewContext
+    
     //MARK: - CARD FETCH
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \TransactionCategory.timestamp, ascending: false)],
@@ -23,8 +25,23 @@ struct CategoriesListView: View {
         Form{
             Section(header: Text("Select a category")){
                 ForEach(categories){ category in
-                    Text(category.name ?? "")
+                    HStack(spacing: 12){
+                        if let data = category.colorData, let uiColor = UIColor.color(data: data){
+                            let color = Color(uiColor)
+                            Spacer()
+                                .frame(width: 30, height: 10)
+                                .background(color)
+                        }
+                        Text(category.name ?? "")
+                        Spacer()
+                    }//: HSTACK
                 }//: LOOP
+                .onDelete{ indexSet in
+                    indexSet.forEach{ item in
+                        viewContext.delete(categories[item])
+                    }
+                    try? viewContext.save()
+                }
             }//: SECTION SELECT CATEGORY
             
             Section(header: Text("Create a category")){
