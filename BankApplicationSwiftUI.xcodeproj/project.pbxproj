@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		FF666D8C2BE1542F00EE15DA /* CategoriesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF666D8B2BE1542F00EE15DA /* CategoriesListView.swift */; };
 		FFC5A4022BD2FC9900948E51 /* BankApplicationSwiftUIApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC5A4012BD2FC9900948E51 /* BankApplicationSwiftUIApp.swift */; };
 		FFC5A4042BD2FC9900948E51 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = FFC5A4032BD2FC9900948E51 /* ContentView.swift */; };
 		FFC5A4062BD2FC9B00948E51 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FFC5A4052BD2FC9B00948E51 /* Assets.xcassets */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		FF666D8B2BE1542F00EE15DA /* CategoriesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesListView.swift; sourceTree = "<group>"; };
 		FFC5A3FE2BD2FC9900948E51 /* BankApplicationSwiftUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BankApplicationSwiftUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FFC5A4012BD2FC9900948E51 /* BankApplicationSwiftUIApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BankApplicationSwiftUIApp.swift; sourceTree = "<group>"; };
 		FFC5A4032BD2FC9900948E51 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 				FFC5A4222BDB8E3900948E51 /* AddTransactionForm.swift */,
 				FFC5A4242BDE97A100948E51 /* TransactionsListView.swift */,
 				FFC5A4262BDE9AE300948E51 /* CardTransactionView.swift */,
+				FF666D8B2BE1542F00EE15DA /* CategoriesListView.swift */,
 			);
 			path = Transaction;
 			sourceTree = "<group>";
@@ -204,6 +207,7 @@
 				FFC5A4232BDB8E3900948E51 /* AddTransactionForm.swift in Sources */,
 				FFC5A4252BDE97A100948E51 /* TransactionsListView.swift in Sources */,
 				FFC5A41A2BD43D7500948E51 /* AddCardForm.swift in Sources */,
+				FF666D8C2BE1542F00EE15DA /* CategoriesListView.swift in Sources */,
 				FFC5A4022BD2FC9900948E51 /* BankApplicationSwiftUIApp.swift in Sources */,
 				FFC5A4182BD3E33A00948E51 /* CreditCardView.swift in Sources */,
 				FFC5A41E2BD8E49B00948E51 /* Card.swift in Sources */,
