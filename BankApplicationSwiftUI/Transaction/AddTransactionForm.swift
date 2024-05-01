@@ -12,6 +12,21 @@ struct AddTransactionForm: View {
     
     let card: Card
     
+    init(card: Card){
+        self.card = card
+        let context = PersistenceController.shared.container.viewContext
+        let request = TransactionCategory.fetchRequest()
+        request.sortDescriptors = [.init(key: "timestamp", ascending: false)]
+        do {
+            let result = try context.fetch(request)
+            if let first = result.first{
+                self._selectedCategory = .init(initialValue: [first])
+            }
+        }catch{
+            print("Error fetch \(error)")
+        }
+    }
+    
     @Environment(\.presentationMode) var presentationMode
     @State private var name = ""
     @State private var ammount = ""

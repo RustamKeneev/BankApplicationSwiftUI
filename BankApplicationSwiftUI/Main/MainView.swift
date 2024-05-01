@@ -56,8 +56,6 @@ struct MainView: View {
             .navigationTitle("Credit Cards")
             .navigationBarItems(
                 leading: HStack {
-                addItemButton
-                deleteAllButton
             },
                 trailing: addCardButton)
         }//: NAVIGATION VIEW
@@ -81,39 +79,6 @@ struct MainView: View {
             
         }//: VSTACK
         .font(.system(size: 22, weight: .bold))
-    }
-    
-    private var deleteAllButton: some View {
-        Button{
-            cards.forEach { card in
-                viewContext.delete(card)
-            }
-            do {
-                try viewContext.save()
-            }catch{
-                
-            }
-        } label: {
-            Text("Delete all")
-        }
-    }
-    
-    var addItemButton: some View{
-        Button(action: {
-            withAnimation {
-                let viewContext = PersistenceController.shared.container.viewContext
-                let card = Card(context: viewContext)
-                card.timestamp = Date()
-                do {
-                    try viewContext.save()
-                } catch {
-//                    let nsError = error as NSError
-//                    fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-                }
-            }
-        }, label: {
-            Text("Add Item")
-        })
     }
     
     var addCardButton: some View {
