@@ -18,7 +18,8 @@ struct AddTransactionForm: View {
     @State private var date = Date()
     @State private var photoData: Data?
     @State private var shouldPresentPhotoPicker = false
-    
+    @State var selectedCategory = Set<TransactionCategory>()
+
     
     var body: some View {
         NavigationView{
@@ -28,15 +29,29 @@ struct AddTransactionForm: View {
                     TextField("Ammount", text: $ammount)
                     DatePicker("Date", selection: $date, displayedComponents: .date)
                 }//: SECTION ONE
+                
                 Section(header: Text("Categories")){
                     NavigationLink {
-                        CategoriesListView()
+                        CategoriesListView(selectedCategories: $selectedCategory)
                             .navigationTitle("Categories")
                             .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
                     } label: {
                         Text("Select categories")
                     }
-                }
+                    let sortedByTimestampCategories = Array(selectedCategory).sorted(by: {$0.timestamp?.compare($1.timestamp ?? Date()) == .orderedDescending })
+                    ForEach(sortedByTimestampCategories){ category in
+                        HStack(spacing: 12){
+                            if let data = category.colorData, let uiColor = UIColor.color(data: data){
+                                let color = Color(uiColor)
+                                Spacer()
+                                    .frame(width: 30, height: 10)
+                                    .background(color)
+                            }
+                            Text(category.name ?? "")
+                        }//: HSTACK
+                    }
+                }//: SECTION TWO
+                
                 Section(header: Text("Photo/Receipt")){
                     Button(action: {
                         shouldPresentPhotoPicker.toggle()
@@ -51,7 +66,7 @@ struct AddTransactionForm: View {
                             .resizable()
                             .scaledToFit()
                     }
-                }//: SECTION TWO
+                }//: SECTION THREE
             }//: FORM
             .navigationTitle("Add Transaction")
             .navigationBarItems(leading: cancelButton, trailing: saveButton)
