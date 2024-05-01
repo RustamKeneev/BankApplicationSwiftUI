@@ -120,6 +120,7 @@ struct AddTransactionForm: View {
             transaction.ammount = Float(self.ammount) ?? 0
             transaction.photoData = self.photoData
             transaction.card = self.card
+            transaction.categories = self.selectedCategory as NSSet
             do {
                 try context.save()
                 presentationMode.wrappedValue.dismiss()

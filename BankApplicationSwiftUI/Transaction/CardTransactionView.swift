@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct CardTransactionView: View {
     
@@ -48,6 +49,30 @@ struct CardTransactionView: View {
                     Text(String(format:"$%.2f", transaction.ammount ))
                 }//: VSTACK
             }//: HSTACK
+            if let categories = transaction.categories as? Set<TransactionCategory>{
+//                let array = Array(categories)
+                let sortedByTimestampCategories = Array(categories).sorted(by: {$0.timestamp?.compare($1.timestamp ?? Date()) == .orderedDescending })
+                HStack {
+                    ForEach(sortedByTimestampCategories){ category in
+                        HStack{
+                            HStack(spacing: 12){
+                                if let data = category.colorData, let uiColor = UIColor.color(data: data){
+                                    let color = Color(uiColor)
+                                    Text(category.name ?? "")
+                                        .font(.system(size: 16, weight: .semibold))
+                                        .padding(.vertical, 6)
+                                        .padding(.horizontal, 8)
+                                        .background(color)
+                                        .foregroundColor(.white)
+                                        .cornerRadius(6)
+                                }
+                            }//: HSTACK
+                        }//: HSTACK
+                        Spacer()
+                    }//: LOOP
+                }//: HSTACK
+            }
+
             if let photoData = transaction.photoData,
                let uiImage = UIImage(data: photoData){
                 Image(uiImage: uiImage)
@@ -77,6 +102,7 @@ struct CardTransactionView: View {
 }
 
 #Preview {
-    let transaction = CardTransaction()
+    let context = PersistenceController.shared.container.viewContext
+    let transaction = CardTransaction(context: context)
     return CardTransactionView(transaction: transaction)
 }
