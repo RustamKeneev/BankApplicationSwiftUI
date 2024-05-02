@@ -21,6 +21,7 @@ struct TransactionsListView: View {
     
     @State var shouldShowAddTransactionForm = false
     @State var shouldShowFilterSheet = false
+    @State var selectedCategories = Set<TransactionCategory>()
     
     @Environment(\.managedObjectContext) private var viewContext
     
@@ -47,13 +48,13 @@ struct TransactionsListView: View {
                     addTransactionButton
                     filterButton
                         .sheet(isPresented: $shouldShowFilterSheet){
-                            FilterSheet{ categories in 
-                                
+                            FilterSheet(selectedCategories: self.selectedCategories){ categories in
+                                self.selectedCategories = categories
                             }
                         }
                 }//: HSTACK
                 .padding(.horizontal)
-                ForEach(fetchRequest.wrappedValue){ transaction in
+                ForEach(filterTransaction(selectedCategories: self.selectedCategories)){ transaction in
                     CardTransactionView(transaction: transaction)
                 }//: LOOP TRANSACTION
             }
@@ -76,6 +77,23 @@ struct TransactionsListView: View {
                 .cornerRadius(6)
         })
     }//: ADD TRANSACTION BUTTON
+    
+    private func filterTransaction(selectedCategories: Set<TransactionCategory>) -> [CardTransaction]{
+        if selectedCategories.isEmpty{
+            return Array(fetchRequest.wrappedValue)
+        }
+        return fetchRequest.wrappedValue.filter { transaction in
+            var shouldKeep = false
+            if let categories = transaction.categories as? Set<TransactionCategory> {
+                categories.forEach({ category in
+                    if selectedCategories.contains(category){
+                        shouldKeep = true
+                    }
+                })
+            }
+            return shouldKeep
+        }
+    }
     
     private var filterButton: some View{
         Button(action: {
