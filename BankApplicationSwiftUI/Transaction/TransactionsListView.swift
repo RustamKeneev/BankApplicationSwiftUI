@@ -123,13 +123,15 @@ struct TransactionsListView_Previews: PreviewProvider {
     
     static var previews: some View {
         let context = PersistenceController.shared.container.viewContext
-        ScrollView {
-            if let card = firstCard {
-                TransactionsListView(card: card)
+        NavigationView{
+            ScrollView {
+                if let card = firstCard {
+                    TransactionsListView(card: card)
+                }
+                
             }
-            
         }
-        
+        .colorScheme(.light)
             .environment(\.managedObjectContext, context)
     }
 }

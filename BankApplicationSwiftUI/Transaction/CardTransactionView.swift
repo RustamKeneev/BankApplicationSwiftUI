@@ -14,6 +14,8 @@ struct CardTransactionView: View {
     
     @State var shouldPresentActionSheet = false
     
+    @Environment(\.colorScheme) var colorScheme
+    
     private let dateFormatter: DateFormatter = {
         let formater = DateFormatter()
         formater.dateStyle = .short
@@ -82,7 +84,8 @@ struct CardTransactionView: View {
         }//:VSTACK
         .foregroundColor(Color(.label))
         .padding()
-        .background(Color.white)
+//        .background(colorScheme == .dark ? Color.gray : .white)
+        .background(Color.cardBackground)
         .cornerRadius(6)
         .shadow(radius: 6)
         .padding()

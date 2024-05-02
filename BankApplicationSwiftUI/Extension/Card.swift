@@ -7,6 +7,7 @@
 
 import CoreData
 import UIKit
+import SwiftUI
 
 extension Card {
     static func fetchSampleCard() -> Card? {
@@ -74,4 +75,8 @@ extension UIImage {
             draw(in: CGRect(origin: middle, size: resizeSize))
         }
     }
+}
+
+extension Color {
+    static let cardBackground = Color("cardTransactionBackground")
 }
