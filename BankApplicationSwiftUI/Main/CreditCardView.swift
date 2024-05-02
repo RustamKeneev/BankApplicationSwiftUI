@@ -13,6 +13,19 @@ struct CreditCardView: View {
     @State private var shouldActionSheet = false
     @State private var shouldShowEditForm = false
     @State var refreshId = UUID()
+    
+    @Environment(\.managedObjectContext) private var viewContext
+    
+    //MARK: - CARD TRANSACTION
+    var fetchRequest: FetchRequest<CardTransaction>
+    
+    init(card: Card){
+        self.card = card
+        fetchRequest = FetchRequest<CardTransaction>(entity: CardTransaction.entity(), sortDescriptors: [
+            .init(key: "timestamp", ascending: false)
+        ], predicate: .init(format: "card == %@", self.card))
+    }
+    
     var body: some View {
         VStack(alignment: .leading, spacing: 16){
             HStack{
@@ -43,8 +56,10 @@ struct CreditCardView: View {
                     .frame(height: 44)
                     .clipped()
                 Spacer()
-                Text("Balance 5,000$")
+                let balance = fetchRequest.wrappedValue.reduce(0, { $0 + $1.ammount })
+                Text("Balance: $\(String(format: "%.2f", balance))")
                     .font(.system(size: 18, weight: .semibold))
+
                 
             }//: HSTACK
             Text(card.number ?? "")
@@ -99,9 +114,9 @@ struct CreditCardView: View {
 
 
 #Preview {
-    if let sampleCard = Card.fetchSampleCard() {
-        CreditCardView(card: sampleCard)
-    } else {
-        Text("No card available for preview")
-    }
+    let context = PersistenceController.shared.container.viewContext
+    let transaction = Card(context: context)
+    return CreditCardView(card: transaction)
+
 }
+
